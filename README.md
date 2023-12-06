@@ -39,6 +39,10 @@ Travel Buddy + AI is built on a foundation of cutting-edge technologies to provi
 
 With this powerful combination of technologies, Travel Buddy + AI is here to help you plan and enjoy your day out.
 
+## Deployed Application 
+
+[Travel Buddy + AI](https://travel-buddy-powered-by-python-d50074031ec6.herokuapp.com/)
+
 
 
 
