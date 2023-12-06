@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, flash
 from chatgpt import call_openai_api
 from weather import main as get_weather
 from datetime import timedelta
+import os
 
 app = Flask(__name__, template_folder='index.html')
 app.secret_key = 'your_secret_key'
@@ -45,7 +46,8 @@ def index():
     return render_template('index.html', weather_data=weather_data, openai_data=openai_data)
 
 if __name__ == '__main__':
-    app.run(debug=False)
+        app.run(threaded=True, port=int(os.environ.get('PORT', 5000)))
+
 
 
 
