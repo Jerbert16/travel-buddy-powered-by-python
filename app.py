@@ -4,7 +4,7 @@ from weather import main as get_weather
 from datetime import timedelta
 import os
 
-app = Flask(__name__, template_folder='index.html')
+app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 app.permanent_session_lifetime = timedelta(seconds=60)
