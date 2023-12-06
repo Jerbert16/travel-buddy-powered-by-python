@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Buddy 🧳</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALWyiaPVg3lXVLv_p-IoTVFBdtOj0xH4U&libraries=places&callback=initMap" async defer></script>
+  </head>
+  <style>
+    #map {
+      height: 600px;
+      width: 100%;
+    }
+    .controls {
+      margin-top: 10px;
+      border: 1px solid transparent;
+      border-radius: 2px 0 0 2px;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      height: 32px;
+      outline: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #pac-input {
+      background-color: #fff;
+      padding: 0 11px 0 13px;
+      width: 400px;
+      font-family: Roboto;
+      font-size: 15px;
+      font-weight: 300;
+      text-overflow: ellipsis;
+    }
+
+    #pac-input:focus {
+      border-color: #4d90fe;
+    }
+
+    #pac-input.hidden {
+      display: none;
+    }
+
+    #body {
+      background: url('https://images.unsplash.com/photo-1503379705160-76a79bd12e1b?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+      background-size: cover;
+  }
+
+  #aiPrompt {
+    height: 600px;
+  }
+
+  #aiBtn {
+    width: 200px;
+    height: 45px;
+    border-radius: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: gray;
+    border: none;
+    color: white;
+  }
+
+  #userPrompt {
+    height: 200px;
+  }
+
+  #mainBody {
+    height: 700px;
+  }
+    
+  </style>
+  <div class="text-center">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-danger" role="alert">
+      {% for message in messages %}
+      {{ message }}<br>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+  </div>
+          <header class="d-flex justify-content-center h-100 w-100 p-2 bg-dark">
+          <h1 class="display-3">Travel Buddy + AI 🧳</h1>
+          </header>
+  <body class="bg-dark text-white">
+      <div class="w-100 d-flex flex-wrap justify-content-evenly" id="body">
+      <div class="d-flex rounded w-50 h-50 m-5">
+        <div class="m-4 text-white" id="mainBody">
+      <h2>Welcome to Travel Buddy + AI!</h2>
+      <p class="mt-3">Travel buddy is a simple yet handy application that harnesses the power of Python, Flask, OpenAI, OpenWeather, Bootstrap, and JavaScript to make planning a day out effortless.</p>
+      <p>Enter your city, state, and country to get the current weather, today's low, today's high, and the humidity.</p>
+      <p>Then, once you have an idea of the weather, use the prompt below to have AI create an itinerary catered to your interests and use the map - if location is enabled - to get a sense of where those places are.</p>
+      <p>Happy adventuring!</p>
+    </div>
+    </div>
+      <div class="bg-white p-4 rounded h-50 mt-5 mb-5"> 
+      <form action="/" method="post">
+            <div class="col-sm mt-3">
+              <input type="text" id="cityName" name="cityName" placeholder="City" class="form-control bg-light"></input>
+            </div>
+            <div class="col-sm">
+              <input type="text" id="stateName" name="stateName" placeholder="Enter State" class="form-control mt-2 bg-light"></input>
+            </div>
+            <div class="col-sm">
+              <input type="text" id="countryName" name="countryName" value="USA" class="form-control mt-2 bg-light"></input>
+            </div>
+          <button class="submit btn btn-info m-4 text-white" name="get_weather">Get Current Weather</button>
+          <div class="w-100 rounded text-black">
+            {% if weather_data %}
+            <h4 class="text-center">Current Weather For: <br>
+              {{ weather_data.name }}</h4>
+              <div class="d-flex justify-content-center w-100">
+            <img src="https://openweathermap.org/img/wn/{{weather_data.icon}}@2x.png" alt="weather-icon"><br>
+              </div>
+            <p class="text-center m-0">Sky: {{ weather_data.description }} </p>
+            <p class="m-0 text-center">Current Temperature: {{ weather_data.temperature }} F°</p>
+            <p class="m-0 text-center">Today's Low: {{ weather_data.temp_min }} F°</p>
+            <p class="m-0 text-center">Today's High: {{ weather_data.temp_max }} F°</p>
+            <p class="m-0 text-center">Humidity: {{ weather_data.humidity }} %</p>
+            {% endif %}
+      </div>
+        </div>
+    </div>
+          <div class="w-100 d-flex flex-wrap justify-content-center bg-warning p-5" id="aiPrompt">
+            <h2>Let AI Help You Plan Your Trip</h2>
+            <div class="m-5 w-75">
+              <textarea id="userPrompt" name="userPrompt" placeholder="Ask me to create an itinerary for your destination.. or about the history of a landmark.. or to write a poem about it.. be as specific as possible!" class="form-control"></textarea>
+          </div>          
+          <button name="call_openai" id="aiBtn">Generate Response</button>
+        </div>
+        </form>
+        <div class="d-flex justify-content-center">
+          <div class="col-6 bg-dark w-75 pb-5 m-5">
+            {% if openai_data %}
+            {% for paragraph in openai_data.split('\n') %}
+            {% if loop.first %}
+            <h3><strong>{{ paragraph }}</strong></h3>
+            {% else %}
+            <p>{{ paragraph }}</p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      <input id="pac-input" class="controls hidden" type="text" placeholder="Search Box">
+      <div id="map"></div>
+      <script>
+        var map;
+        var input;
+        var searchBox;
+      
+        function initMap() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+              var userLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              };
+              initializeMap(userLocation);
+            });
+          } else {
+            var defaultLocation = { lat: 39.739, lng: -104.990 };
+            initializeMap(defaultLocation);
+          }
+        }
+     
+        function initializeMap(centerLocation) {
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: centerLocation,
+            zoom: 11
+          });
+      
+          input = document.getElementById('pac-input');
+          searchBox = new google.maps.places.SearchBox(input);
+          map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+      
+          map.addListener('bounds_changed', function () {
+            searchBox.setBounds(map.getBounds());
+          });
+      
+          searchBox.addListener('places_changed', function () {
+            var places = searchBox.getPlaces();
+      
+            if (places.length === 0) {
+              return;
+            }
+      
+            map.setCenter(places[0].geometry.location);
+      
+            places.forEach(function (place) {
+              var marker = new google.maps.Marker({
+                map: map,
+                title: place.name,
+                position: place.geometry.location
+              });
+            });
+          });
+          input.classList.remove('hidden');
+        }
+      </script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+      ></script>
+  </body>
+  <footer class="d-flex w-100 justify-content-center pt-2 bg-dark">
+    <p>Copyright 2023 | Jeff Erbert</p>
+  </footer>
+</html>
+
+
+
+
+ 
