@@ -3,10 +3,10 @@ from chatgpt import call_openai_api
 from weather import main as get_weather
 from datetime import timedelta
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='index.html')
 app.secret_key = 'your_secret_key'
 
-app.permanent_session_lifetime = timedelta(seconds=900)
+app.permanent_session_lifetime = timedelta(seconds=60)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
