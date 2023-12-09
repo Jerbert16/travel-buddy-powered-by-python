@@ -139,7 +139,8 @@
           <div class="d-flex justify-content-center">
             <div class="col-6 w-75 m-5 text-white">
               {% if openai_data %}
-              <h3 class="border-bottom">Your AI Generated Response:</h3>
+              <div class="border rounded p-5">
+              <h3>Your AI Generated Response:</h3>
               {% for paragraph in openai_data.split('\n') %}
               {% if loop.first %}
               <h3><strong>{{ paragraph }}</strong></h3>
@@ -148,6 +149,7 @@
               {% endif %}
               {% endfor %}
               {% endif %}
+              </div>
             </div>
           </div>
         </div>
