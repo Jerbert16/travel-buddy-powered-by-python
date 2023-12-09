@@ -91,22 +91,22 @@
         <div class="d-flex flex-wrap w-100 h-100">
         <div class="col-12 col-md-6 mb-5">
           <div class="text-white">
-            <h2 class="m-5">Welcome to Travel Buddy + AI!</h2>
+            <h2 class="m-5 pb-2 border-bottom">Welcome to Travel Buddy + AI!</h2>
             <div class="m-5">
             <p>Travel buddy is a simple yet handy application that harnesses the power of Python, Flask,
               OpenAI, OpenWeather, Bootstrap, and JavaScript to make planning a day out effortless.</p>
             <p>Enter your city, state, and country to get the current weather, today's low, today's high, and the humidity.</p>
             <p>Then, once you have an idea of the weather, use the prompt below to have AI create an itinerary catered to
               your interests and use the map - if location is enabled - to get a sense of where those places are.</p>
-            <p>Happy adventuring!</p>
+            <p class="mb-5">Happy adventuring!</p>
             <form action="/" method="post">
               <div class="p-2 rounded d-flex border border-left-0">
-                <div class="w-50 p-4">
+                <div class="col-sm p-4">
                 <div class="col-sm mt-3">
                   <input type="text" id="cityName" name="cityName" placeholder="City" class="form-control"></input>
                 </div>
                 <div class="col-sm">
-                  <input type="text" id="stateName" name="stateName" placeholder="Enter State"
+                  <input type="text" id="stateName" name="stateName" placeholder="State"
                     class="form-control mt-2 bg-light"></input>
                 </div>
                 <div class="col-sm">
@@ -138,8 +138,8 @@
         <div class="col-12 col-md-6">
           <div class="d-flex justify-content-center">
             <div class="col-6 w-75 m-5 text-white">
-              <h3 class="border-bottom">Your AI Generated Response:</h3>
               {% if openai_data %}
+              <h3 class="border-bottom">Your AI Generated Response:</h3>
               {% for paragraph in openai_data.split('\n') %}
               {% if loop.first %}
               <h3><strong>{{ paragraph }}</strong></h3>
