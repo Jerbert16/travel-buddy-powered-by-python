@@ -100,7 +100,7 @@
               your interests and use the map - if location is enabled - to get a sense of where those places are.</p>
             <p class="mb-5">Happy adventuring!</p>
             <form action="/" method="post">
-              <div class="p-2 rounded d-flex border border-left-0">
+              <div class="p-2 rounded d-flex flex-wrap border border-left-0 justify-content-evenly">
                 <div class="col-sm p-4">
                 <div class="col-sm mt-3">
                   <input type="text" id="cityName" name="cityName" placeholder="City" class="form-control"></input>
@@ -117,7 +117,7 @@
                 <button class="submit btn btn-info m-4 text-white" name="get_weather">Get Current Weather</button>
                 </div>
               </div>
-              <div class="w-50 rounded text-white">
+              <div class="text-white p-4">
                 {% if weather_data %}
                 <h4 class="text-center">Current Weather For: <br>
                   {{ weather_data.name }}</h4>
