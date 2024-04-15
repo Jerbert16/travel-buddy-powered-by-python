@@ -35,7 +35,7 @@ With this powerful combination of technologies, Travel Buddy + AI is here to hel
 
 ## Deployed Application 
 
-[Travel Buddy + AI](https://travel-buddy-powered-by-python-d50074031ec6.herokuapp.com/)
+[Travel Buddy + AI](https://travel-buddy-powered-by-python.onrender.com/)
 
 
 
