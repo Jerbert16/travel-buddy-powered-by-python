@@ -7,7 +7,7 @@ load_dotenv()
 def call_openai_api(prompt):
     api_key = os.getenv('OPENAI_API_KEY')
     endpoint = 'https://api.openai.com/v1/completions'
-    model = 'text-davinci-003'
+    model = 'gpt-3.5-turbo'
     temperature = 0.6
     max_tokens = 500
 
