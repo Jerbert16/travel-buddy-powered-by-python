@@ -1,5 +1,5 @@
 # Travel Buddy + AI
-Welcome to Travel Buddy + AI! This is a simple and convenient application designed to enhance your travel planning experience. By leveraging the power of Python, Flask, OpenAI, OpenWeather, Bootstrap, and JavaScript, Travel Buddy + AI puts you in command of your plans.
+Welcome to Travel Buddy + AI! This is a simple and convenient application designed to enhance your travel planning experience. By leveraging the power of Python, Flask, OpenAI, OpenWeather, and Bootstrap, Travel Buddy + AI puts you in command of your plans.
 
 ## Project Description
 Have the day off, but uncertain about the weather and unsure of where to go? 
@@ -14,10 +14,6 @@ Enter your city, state, and country to retrieve the current weather, today's low
 
 Once you have a grasp of the weather conditions, use the AI-powered prompt below to create a customized itinerary tailored to your interest. Let the artificial intelligence suggest exciting places for you to explore, or use it to help learn some history about the place.
 
-**Interactive Map:** 
-
-To get a sense of the locations suggested by the AI or to see where you are, utilize the interactive map feature. 
-
 Happy adventuring with Travel Buddy + AI!
 
 ## Technologies Used
@@ -30,8 +26,6 @@ Travel Buddy + AI is built on a foundation of cutting-edge technologies to provi
 **OpenAI_API:** Harnessing the capabilities of artificial intelligence to generate personalized itineraries.
 
 **OpenWeatherAPI:** Integrating real-time weather data to keep you informed about current conditions.
-
-**GoogleMapsAPI:** The API behind the map.
 
 **Bootstrap:** Ensuring a responsive and visually appealing user interface for a smooth user experience.
 
