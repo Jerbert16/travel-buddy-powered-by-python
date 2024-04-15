@@ -40,6 +40,7 @@ def index():
                 try:
                     openai_data = call_openai_api(user_prompt)
                     session['openai_data'] = openai_data
+                    print(openai_data)
                 except Exception as e:
                     flash(f'Error calling OpenAI API: {str(e)}')
 
